@@ -9,7 +9,7 @@ Sure you could just go to a discord server and do the same, but there's so many 
 With StackSpace, you have both regular chats, and sharable workspaces with full IDE features.
 
 ### Can I contribute?
-As of Feb 21, this project is only maintained and developed by myself.\
+As of Feb 22, this project is only maintained and developed by myself.\
 I have, however, decided to keep this project open source as stated below.
 
 This means anyone can contribute and help expand this project.
