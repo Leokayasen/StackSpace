@@ -1,0 +1,25 @@
+{
+  "name": "stackspace",
+  "version": "1.0.0",
+  "description": "a dev-focused chat and workspace platform built with Electron.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "server": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "kai",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "electron": "^34.2.0",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.10.1",
+    "passport": "^0.7.0",
+    "passport-github": "^1.1.0",
+    "socket.io": "^4.8.1"
+  }
+}
