@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://esm.sh/@codemirror/theme-one-dark@6.2.1/theme-one-dark.css">
+    <title>StackSpace - Concept</title>
+</head>
+<body>
+<div id="app">
+    <aside class="sidebar">
+        <h2>Channels</h2>
+        <ul id="channel-list">
+            <li class="channel" data-channel="announcements"># announcements</li>
+            <li class="channel active" data-channel="general"># general</li>
+            <li class="channel" data-channel="help"># help</li>
+            <li class="channel" data-channel="random"># random</li>
+            <li class="channel" data-channel="workspace"># workspace</li>
+        </ul>
+    </aside>
+    <main class="chat-container">
+        <header class="chat-header">
+            <span id="current-channel"># general</span>
+        </header>
+        <section class="messages" id="messages"></section>
+        <section id="workspace-ide" style="display:none;padding:24px;">
+            <div id="editor" style="width:100%;max-width:640px;height:320px;margin-bottom:12px;border-radius:8px;box-shadow:0 2px 8px #0002;"></div>
+            <button id="run-btn" style="background:var(--accent);color:#fff;padding:8px 24px;border:none;border-radius:6px;cursor:pointer;font-size:1em;">Run</button>
+            <div id="output-panel" style="margin-top:16px;background:var(--message-bg);color:var(--text);padding:14px 18px;border-radius:7px;min-height:48px;max-width:640px;white-space:pre-wrap;"></div>
+        </section>
+        <form id="message-form" autocomplete="off" enctype="multipart/form-data">
+            <button type="button" id="emoji-btn" class="input-icon-btn" title="Insert emoji">
+                <i class="fas fa-smile"></i>
+            </button>
+            <button type="button" id="gif-btn" class="input-icon-btn" title="Insert gif">
+                <i class="fas fa-film"></i>
+            </button>
+            <label for="file-input" class="file-upload-label" title="Attach file">
+                <i class="fas fa-paperclip"></i>
+                <input type="file" id="file-input" accept=".jpg,.jpeg,.png,.gif,.txt,.pdf" style="display: none;">
+            </label>
+            <label for="message-input"></label><input type="text" id="message-input" placeholder="Type your message...">
+            <span id="char-count" title="Character count">0/4000</span>
+            <button type="submit">Send</button>
+        </form>
+        <div id="live-preview-container">
+            <div id="live-preview-header">Markdown Preview:</div>
+            <div id="live-preview"></div>
+        </div>
+        <ul id="slash-commands-list" class="slash-commands-list"></ul>
+        <div id="toast-container"></div>
+    </main>
+</div>
+
+<div id="emoji-picker-modal" class="modal">
+    <div class="modal-content emoji-picker">
+        <div class="emoji-grid" id="emoji-grid"></div>
+        <button class="modal-close" id="emoji-picker-close">Close</button>
+    </div>
+</div>
+
+<div id="gif-picker-modal" class="modal">
+    <div class="modal-content gif-picker">
+        <label for="gif-search-input">
+            <input type="text" id="gif-search-input" placeholder="Search GIFs...">
+        </label>
+        <button id="gif-search-btn">Search</button>
+        <div id="gif-grid"></div>
+        <button class="modal-close" id="gif-picker-close">Close</button>
+    </div>
+</div>
+
+<div class="user-popup-wrapper">
+    <div class="user-profile" id="userProfileTrigger">
+        <img src="https://ui-avatars.com/api/?name=User&background=7289da&color=fff" alt="User Avatar">
+        <span class="username">User</span>
+    </div>
+    <div class="user-popup" id="userPopup">
+        <ul>
+            <li><button id="userSettingsBtn">User Settings</button></li>
+            <li><button id="logoutBtn">Logout</button></li>
+        </ul>
+    </div>
+</div>
+
+<div class="modal" id="settingsModal">
+    <div class="modal-content">
+        <span class="close" id="closeSettings">&times;</span>
+        <h2>User Settings</h2>
+        <label>
+            Username:
+            <input type="text" id="setUsername">
+        </label>
+        <label>
+            Avatar URL:
+            <input type="text" id="setAvatar" placeholder="https://ui-avatars.com/api/?name=User&background=7289da&color=fff">
+        </label>
+        <label>
+            Theme:
+            <select id="setTheme">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+            </select>
+        </label>
+        <button id="saveSettingsBtn">Save</button>
+    </div>
+</div>
+
+<script type="module">
+    import {EditorView, basicSetup} from "https://esm.sh/@codemirror/basic-setup@0.19.1";
+    import {EditorState} from "https://esm.sh/@codemirror/state@0.19.1";
+    import {javascript} from "https://esm.sh/@codemirror/lang-javascript@6.4.1";
+    window.CodeMirrorLib = {EditorView, EditorState, basicSetup, javascript};
+</script>
+<script src="app.js"></script>
+</body>
+</html>
